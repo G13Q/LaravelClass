@@ -28,9 +28,6 @@ Route::get('/profile', function(){
     return view('profile');
 })->name('profile');
 
-Route::post('/profile', function(Request $req){
-    $nom = $req->input('nom');
-    $email = $req->input('email');
-
-    return view('profile', ["nom" =>$nom, "email"=> $email ]);
+Route::post('/profile', function(Request $request){
+    return view('profile', ["nom" =>$request->input('nom'), "email"=> $request->input('email') ]);
 });
