@@ -31,3 +31,17 @@ Route::get('/profile', function(){
 Route::post('/profile', function(Request $request){
     return view('profile', ["nom" =>$request->input('nom'), "email"=> $request->input('email') ]);
 });
+
+Route::get('/home/{resultat?}',function($resultat = null){
+    return view('calculatriceView');
+});
+
+Route::post('/home/{resultat?}', function(Request $req, $resultat = null){
+    $n1 = $req->input('n1');
+    $n2 = $req->input('n2');
+    $operator = $req->input('operator');
+    $operators = ['+' => $n1 + $n2, '-' => $n1 - $n2, '*' => $n1 * $n2 , '/' => $n1 / $n2];
+
+    $resultat =  $operators[$operator];
+    return view('calculatriceView', ['resultat' => $resultat]);
+});
